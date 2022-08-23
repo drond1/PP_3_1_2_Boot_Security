@@ -25,6 +25,11 @@ public class User implements UserDetails {
     @Column(name = "username")
     private String username;
 
+    @NotBlank(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Column(name = "last_name")
+    private String lastName;
+
     @Min(value = 0, message = "Age should be greater than 0")
     @Digits(integer = 3, fraction = 0, message = "Age should be less than 3 digits")
     @Column(name = "age")
@@ -75,6 +80,14 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

@@ -51,8 +51,8 @@
         }
 
         ul {
-            padding: 5px;
-            margin-left: 10px;
+            padding: 0;
+            margin-left: 2px;
             height: auto;
             vertical-align: middle;
         }
@@ -66,12 +66,13 @@
         <table class="tg">
             <thead>
             <tr>
-                <th width="40">id</th>
-                <th width="120">user name</th>
-                <th width="120">password</th>
-                <th width="120">age</th>
-                <th width="120">email</th>
-                <th width="120">roles</th>
+                <th width="40">ID</th>
+                <th width="120">First Name</th>
+                <th width="120">Last Name</th>
+                <th width="120">Password</th>
+                <th width="120">Age</th>
+                <th width="120">Email</th>
+                <th width="120">Roles</th>
             </tr>
             </thead>
             <tbody>
@@ -79,15 +80,14 @@
             <tr th:each="user : ${users}">
                 <td th:text="${user.getId()}"></td>
                 <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.getLastName()}"></td>
                 <td th:text="${user.getPassword()}"></td>
                 <td th:text="${user.getAge()}"></td>
                 <td th:text="${user.getEmail()}"></td>
 
                 <td>
                     <th:block th:each="msg : ${user.getRoles()}">
-                        <ul type="square">
-                            <li th:text="${msg.getAuthority()}"></li>
-                        </ul>
+                        <ul th:text="${msg.getAuthority().replaceAll('ROLE_','')}"></ul>
                     </th:block>
 
                 </td>
@@ -102,6 +102,7 @@
         <input type="submit" value="Create user"/>
     </form>
     <br>
+
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Logout"/>
     </form>

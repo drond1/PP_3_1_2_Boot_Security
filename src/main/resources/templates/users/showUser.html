@@ -17,6 +17,12 @@
             text-align: center;
             align-content: center;
         }
+        ul {
+            padding: 0;
+            margin-left: 2px;
+            height: auto;
+            vertical-align: middle;
+        }
         h1 {
             color: black;
         }
@@ -28,23 +34,36 @@
 <h1>User Info Page</h1>
 <table border="1">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Age</th>
         <th>Email</th>
+        <th>Role</th>
     </tr>
     <tbody>
     <tr>
         <td th:utext="${user.getId()}"></td>
         <td th:utext="${user.getUsername()}"></td>
+        <td th:utext="${user.getLastName()}"></td>
         <td th:utext="${user.getAge()}"></td>
         <td th:utext="${user.getEmail()}"></td>
+        <td>
+            <th:block th:each="msg : ${user.getRoles()}">
+                <ul th:text="${msg.getAuthority().replaceAll('ROLE_','')}"></ul>
+            </th:block>
+
+        </td>
     </tr>
     </tbody>
 </table>
 <br/>
 <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
     <input type="submit" value = "Delete User"/>
+</form>
+<br>
+<form action="#" th:action="@{/admin}" method="get">
+    <input type="submit" value="Back"/>
 </form>
 <br>
 <form th:action="@{/logout}" method="post">

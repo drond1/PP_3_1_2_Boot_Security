@@ -7,41 +7,52 @@
 <body>
 
 <form th:method="POST" th:action="@{/admin/new}" th:object="${user}">
-    <label for="username">Enter name: </label>
+    <b><label for="username">Enter first name: </label></b>
     <input type="text" th:field="*{username}" id="username" />
     <div style="color:darkred" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error name</div>
 
-    <br/>
+    <br> <br>
 
-    <label for="age">Enter age: </label>
+    <b><label for="username">Enter last name: </label></b>
+    <input type="text" th:field="*{lastName}" id="lastName" />
+    <div style="color:darkred" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error lastName</div>
+
+    <br> <br>
+
+    <b><label for="age">Enter age: </label></b>
     <input type="text" th:field="*{age}" id="age" />
     <div style="color:darkred" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error age</div>
 
-    <br/>
+    <br> <br>
 
-    <label for="email">Enter email: </label>
+    <b><label for="email">Enter email: </label></b>
     <input type="text" th:field="*{email}" id="email" />
     <div style="color:darkred" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error email</div>
+    <br> <br>
 
-    <br/>
-
-    <br/>
-    <label for="password">Enter password: </label>password:</label>
+    <b><label for="password">Enter password: </label></b>
     <input type="text" th:field="*{password}" id="password"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error password</div>
-    <br/>
+    <br> <br>
 
-    <strong><label for="role">Role</label></strong>
+
+    <b><label for="role">Roles</label></b>
     <select multiple class="custom-select w-100"
             size="2" id="role" name="role" required="required">
         <option
                 th:each="role : ${roles}"
-                th:text="${role.getName()}"
+                th:text="${role.getName().replaceAll('ROLE_','')}"
                 th:value="${role.name}">
         </option>
     </select>
 
+    <br> <br>
     <input type="submit" value="Create User"/>
+</form>
+<br>
+
+<form action="#" th:action="@{/admin}" method="get">
+    <input type="submit" value="Back"/>
 </form>
 <br>
 
