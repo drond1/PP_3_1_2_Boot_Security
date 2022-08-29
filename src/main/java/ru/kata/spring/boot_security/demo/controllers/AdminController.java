@@ -6,17 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
+import ru.kata.spring.boot_security.demo.services.UserService;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public AdminController(UserServiceImpl userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
     }
 
@@ -57,7 +57,7 @@ public class AdminController {
         return "users/editUser";
     }
 
-    @PostMapping("/{id}/edit")
+    @PatchMapping("/{id}/edit")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") int id, @RequestParam(value = "role") String role) {
         if (bindingResult.hasErrors()) {
             return "users/editUser";
